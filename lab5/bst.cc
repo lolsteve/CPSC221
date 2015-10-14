@@ -4,6 +4,8 @@
 #include <iomanip>	// provides std::setw()
 #include <cstdio>	// provides sprintf()
 #include "unit.h"
+#include <algorithm>
+
 
 
 /**
@@ -188,40 +190,52 @@ void printTree( Node * r, int d = 0 ) {
  * Returns the number of nodes in the tree rooted at root.
  */
 int numNodes( Node* root ) {
-	/**
-	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
-	 */
-	return 0;
+  // Done by Ahmed
+  if ( root == NULL ) return 0;
+  if(root->right ==  NULL && root->left == NULL) return 1;
+  
+  return numNodes(root->right) + numNodes(root->left) + 1;
 }
 
 /**
  * Returns the number of leaves in the tree rooted at root.
  */
 int numLeaves( Node* root ) {
-	/**
-	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
-	 */
-	return 0;
+  // Done by Ahmed
+  if ( root == NULL ) return 0;
+  if ( root->right == NULL && root->left == NULL ) return 1;
+  return numLeaves(root->right)+ numLeaves(root->left);
 }
 
 /**
  * Returns the height of node x.
  */
 int height( Node* x ) {
-	/**
-	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
-	 */
-	return 0;
+  // Done by Ahmed
+  if (x == NULL) return 0;
+  if ( x->right== NULL && x->left == NULL ) return 0;
+  return std::max(height(x->left),height(x->right) )+1;
 }
 
 /**
  * Returns the depth of node x in the tree rooted at root.
  */
 int depth( Node* x , Node* root ) {
-	/**
-	 * THIS FUNCTION NEEDS TO BE IMPLEMENTED ********************
-	 */
-	return 0;
+  // Done by Ahmed
+  int depth_left;
+  int depth_right;
+
+  if ( root == x ) return 0;
+  if ( root == NULL ) return 0;
+  if ( x == NULL ) return 0;
+  if ( root->left == x || root->right == x) return 1;  
+  if ( root->left != x && root->right != x ){
+    depth_left = depth(x,root->left);
+    if ( depth_left >= 1 ) return depth_left + 1;
+    depth_right =  depth(x,root->right);
+    if ( depth_right >= 1 ) return depth_right + 1;
+  }
+  return std::max(depth_left,depth_right);
 }
 
 /**
@@ -428,7 +442,6 @@ void runTests(Node*& tree, std::vector<int> keys) {
  */
 int main( int argc, char *argv[] ) {
 	Node *tree = NULL;
-
 	bool custom = argc > 1;
 	if (custom) {	// if keys given on command line, run tests
 		keys.clear();
