@@ -117,15 +117,13 @@ bool delete_node(Node*& root, KType key) {
 
     // case 2: target has two children
     else if (target->left != NULL && target->right != NULL) {
-      // Done by Ahmed
-      Node* most_right = target->left;
-      while ( most_right->right != NULL ){
-	most_right = most_right->right;
-      }
-      target->key = most_right->key;
-      delete_node(target->left,target->key);
-      
-        return true; 
+        // Done by Ahmed
+        Node* most_right = target->left;
+        while ( most_right->right != NULL ){
+            most_right = most_right->right;
+        }
+        target->key = most_right->key;
+        return delete_node(target->left,target->key);
     }
 
     // case 3: target has only left child
@@ -243,10 +241,10 @@ int depth( Node* x , Node* root ) {
     if ( x == NULL ) return 0;
     if ( root->left == x || root->right == x) return 1;  
     if ( root->left != x && root->right != x ){
-        depth_left = depth(x,root->left);
-        if ( depth_left >= 1 ) return depth_left + 1;
-        depth_right =  depth(x,root->right);
-        if ( depth_right >= 1 ) return depth_right + 1;
+    depth_left = depth(x,root->left);
+    if ( depth_left >= 1 ) return depth_left + 1;
+    depth_right =  depth(x,root->right);
+    if ( depth_right >= 1 ) return depth_right + 1;
     }
     return std::max(depth_left,depth_right);*/
 }
