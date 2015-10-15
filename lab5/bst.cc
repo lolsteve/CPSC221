@@ -117,15 +117,15 @@ bool delete_node(Node*& root, KType key) {
 
     // case 2: target has two children
     else if (target->left != NULL && target->right != NULL) {
-        /**
-         * THIS SECTION NEEDS TO BE IMPLEMENTED ********************
-         *
-         * Add the missing lines here to make the function complete. (Hint: To
-         * remain a valid binary tree, you must replace 'target' with either
-         * its predecessor or its successor. To make the lab more easy to test,
-         * PLEASE USE THE PREDECESSOR.)
-         */
-        return false; // return true when you're done.
+      // Done by Ahmed
+      Node* most_right = target->left;
+      while ( most_right->right != NULL ){
+	most_right = most_right->right;
+      }
+      target->key = most_right->key;
+      delete_node(target->left,target->key);
+      
+        return true; 
     }
 
     // case 3: target has only left child
