@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 int * x;
+int comps= 0;
 
 void swap(int & a, int & b) {
 	int tmp = a;
@@ -22,6 +23,7 @@ void quicksort(int a, int b) {
 	int i;
 	// in-place partition:
 	for (i = a+1; i <= b; i++) {
+	  comps++;
 		if (x[i] < x[a])
 			swap(x[++m], x[i]);
 	}
@@ -34,20 +36,24 @@ void quicksort(int a, int b) {
 
 int main(int argc, char *argv[]) {
 	srand(time(0));
-
+	int sum = 0;
 	// change the following code
-	x = new int[NN];
-	for (int i=0; i<NN; ++i) {
-		x[i] = rand() % NN;
-	}
+	for ( int j = 0; j < 100; j++ ){
+	  x = new int[NN];
+	  for (int i=0; i<NN; ++i) {
+	    x[i] = rand() % NN;
+	  }
 	
-	quicksort(0, NN-1);
-	for (int i=0; i<NN; ++i) {
-		std::cout << x[i] << " ";
+	  quicksort(0, NN-1);
+	  for (int i=0; i<NN; ++i) {
+	    //	std::cout << x[i] << " ";
+	  }
+	  // std::cout << std::endl;
+	  //std::cout << "Number of comparisons are " << comps << " , Size of array is "<< NN << std::endl;
+	  sum += comps;
+	  delete[] x;
 	}
-	std::cout << std::endl;
-
-	delete[] x;
+	std::cout << "Average number of comparisons are "<< sum/100 << std::endl;
 	return 0;
 }
 
