@@ -18,6 +18,12 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) {
 		cout << "Running your test code..." << endl;
 		/* ADD YOUR TEST CODE HERE */
+                Hashtable H(10000);
+                for (int i = 0; i < 7500; i++) {
+                    H.qinsert(rand() + 1);
+                }
+                cout << "Linear with 7500 keys and size 10000: ";
+                H.printStats();
 
 		return 0;
 	}

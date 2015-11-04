@@ -56,6 +56,10 @@ float Hashtable::probeRate() {
 	return (float)_totalProbes / (float)_numInserts;
 }
 
+int Hashtable::hash2(int k) {
+    return 5 - (k % 5);
+}
+
 int Hashtable::hash(int k) {
 	return k % _size;
 }
@@ -74,7 +78,19 @@ void Hashtable::qinsert(int k) {
 
     // ************* ADD YOUR CODE HERE *******************
     
-    
+    int j = 0;
+    int i = hash(k);
+    while( j < _size ) {
+        j++;
+        if( _table[i] == EMPTY ) {
+            _table[i] = k;
+            tallyProbes( j );
+            return;
+        }
+        else {
+            i = hash( k + j*j );
+        }
+    }
     
     // Your method should return after it stores the value in an EMPTY slot 
     // and calls tallyProbes, so if it gets here, it didn't find an EMPTY slot 
@@ -88,7 +104,19 @@ void Hashtable::linsert(int k) {
 
     // ************* ADD YOUR CODE HERE *******************
     
-    
+    int j = 0;
+    int i = hash(k);
+    while( j < _size ) {
+        j++;
+        if( _table[i] ==  EMPTY ) {
+            _table[i] = k;
+            tallyProbes( j );
+            return;
+        }
+        else {
+            i = hash( k + j );
+        }
+    }
     
     // Your method should return after it stores the value in an EMPTY slot 
     // and calls tallyProbes, so if it gets here, it didn't find an EMPTY slot 
@@ -103,7 +131,19 @@ void Hashtable::dinsert(int k) {
 
     // ************* ADD YOUR CODE HERE *******************
     
-    
+    int j = 0;
+    int i = hash( k );
+    while( j < _size ) {
+        j++;
+        if( _table[i] == EMPTY ) {
+            _table[i] = k;
+            tallyProbes( j );
+            return;
+        }
+        else {
+            i = hash( k + j*hash2( k ) );
+        }
+    }
     
     // Your method should return after it stores the value in an EMPTY slot 
     // and calls tallyProbes, so if it gets here, it didn't find an EMPTY slot 

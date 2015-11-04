@@ -7,6 +7,7 @@ class Hashtable {
 public:
 	Hashtable(int size);
 	~Hashtable();
+        int hash2(int key);
 	int hash(int key);
 	void qinsert(int key);
 	void linsert(int key);
