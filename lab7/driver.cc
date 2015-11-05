@@ -18,11 +18,25 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) {
 		cout << "Running your test code..." << endl;
 		/* ADD YOUR TEST CODE HERE */
-                Hashtable H(10000);
-                for (int i = 0; i < 7500; i++) {
+                int size = 1000;
+                int keys = 2000;
+                Hashtable H(size);
+                for (int i = 0; i < keys; i++) {
+                    H.linsert(rand() + 1);
+                }
+                cout << "Linear with " << keys << " keys and size " << size << ": ";
+                H.printStats();
+                H.clear();
+                for (int i = 0; i < keys; i++) {
                     H.qinsert(rand() + 1);
                 }
-                cout << "Linear with 7500 keys and size 10000: ";
+                cout << "Quadratic with " << keys << " keys and size " << size << ": ";
+                H.printStats();
+                H.clear();
+                for (int i = 0; i < keys; i++) {
+                    H.dinsert(rand() + 1);
+                }
+                cout << "Double with " << keys << " keys and size " << size << ": ";
                 H.printStats();
 
 		return 0;

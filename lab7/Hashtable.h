@@ -7,6 +7,7 @@ class Hashtable {
 public:
 	Hashtable(int size);
 	~Hashtable();
+        int hash3(int key);
         int hash2(int key);
 	int hash(int key);
 	void qinsert(int key);
@@ -29,6 +30,7 @@ private:
 	int nextPrime(int n);
 	bool isPrime(int n);
 	bool isPrime(int n, int divisor); 
+        int previousPrime(int n);
 };
 
 #endif

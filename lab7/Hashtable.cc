@@ -56,12 +56,27 @@ float Hashtable::probeRate() {
 	return (float)_totalProbes / (float)_numInserts;
 }
 
+int Hashtable::hash3(int k) {
+    int r = previousPrime(_size);
+    return r - (k % r);
+}
+
 int Hashtable::hash2(int k) {
     return 5 - (k % 5);
 }
 
 int Hashtable::hash(int k) {
 	return k % _size;
+}
+
+int Hashtable::previousPrime(int n) {
+    int prime = 2;
+    int lastPrime = prime;
+    while ( prime < n ) {
+        lastPrime = prime;
+        prime = nextPrime(prime + 1);
+    }
+    return lastPrime;
 }
 
 void Hashtable::qinsert(int k) {
@@ -80,7 +95,8 @@ void Hashtable::qinsert(int k) {
     
     int j = 0;
     int i = hash(k);
-    while( j < _size ) {
+    int kh = i;
+    while( j < _size/2 ) {
         j++;
         if( _table[i] == EMPTY ) {
             _table[i] = k;
@@ -88,14 +104,14 @@ void Hashtable::qinsert(int k) {
             return;
         }
         else {
-            i = hash( k + j*j );
+            i = hash( kh + ( j*j ) );
         }
     }
     
     // Your method should return after it stores the value in an EMPTY slot 
     // and calls tallyProbes, so if it gets here, it didn't find an EMPTY slot 
     _numFailures += 1; 
-    cout << "Warning: qinsert(" << k << ") found no EMPTY slot, so no insert was done." << endl; 
+    //cout << "Warning: qinsert(" << k << ") found no EMPTY slot, so no insert was done." << endl; 
 }
 
 void Hashtable::linsert(int k) {
@@ -106,6 +122,7 @@ void Hashtable::linsert(int k) {
     
     int j = 0;
     int i = hash(k);
+    int kh = i;
     while( j < _size ) {
         j++;
         if( _table[i] ==  EMPTY ) {
@@ -114,14 +131,14 @@ void Hashtable::linsert(int k) {
             return;
         }
         else {
-            i = hash( k + j );
+            i = hash( kh + j );
         }
     }
     
     // Your method should return after it stores the value in an EMPTY slot 
     // and calls tallyProbes, so if it gets here, it didn't find an EMPTY slot 
     _numFailures += 1; 
-    cout << "Warning: linsert(" << k << ") found no EMPTY slot, so no insert was done." << endl; 
+    //cout << "Warning: linsert(" << k << ") found no EMPTY slot, so no insert was done." << endl; 
 }
 
 void Hashtable::dinsert(int k) {
@@ -133,6 +150,8 @@ void Hashtable::dinsert(int k) {
     
     int j = 0;
     int i = hash( k );
+    int kh = i;
+    int kh2 = hash3( k );
     while( j < _size ) {
         j++;
         if( _table[i] == EMPTY ) {
@@ -141,14 +160,14 @@ void Hashtable::dinsert(int k) {
             return;
         }
         else {
-            i = hash( k + j*hash2( k ) );
+            i = hash( kh + j*kh2 );
         }
     }
     
     // Your method should return after it stores the value in an EMPTY slot 
     // and calls tallyProbes, so if it gets here, it didn't find an EMPTY slot 
     _numFailures += 1; 
-    cout << "Warning: dinsert(" << k << ") found no EMPTY slot, so no insert was done." << endl; 
+    //cout << "Warning: dinsert(" << k << ") found no EMPTY slot, so no insert was done." << endl; 
 }
 
 void Hashtable::print() {
