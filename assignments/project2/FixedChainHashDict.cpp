@@ -64,12 +64,59 @@ bool FixedChainHashDict::find(PuzzleState *key, PuzzleState *&pred) {
   // Be sure not to keep calling getUniqId() over and over again!
 
   // TODO:  Put your code here!  Remember to update probes_stats, too.
+    string theKeyId = key->getUniqId();
+    int counter = 0;
+
+    int hashIndex = hash(theKeyId);
+    ChainNode *temp = table[hashIndex];
+
+    while ( temp != NULL ){
+	
+	// Ensuring we don't go out of bounds
+	if (counter < MAX_STATS ){
+	    probes_stats[counter]++;
+	}
+
+	counter++;
+	
+	// If key is found
+	if ( temp->keyID == theKeyId ){
+	    pred = temp->data;
+	    return true;
+	}
+
+	temp = temp->next;
+
+    }
+    
+    return false;
 }
 
 // You may assume that no duplicate PuzzleState is ever added.
 void FixedChainHashDict::add(PuzzleState *key, PuzzleState *pred) {
 
   // TODO:  Put your code here!
+    string theKeyId = key->getUniqId();
+    int hashIndex = hash(theKeyId);
+    
+    ChainNode * theNode = new ChainNode();
+    
+    theNode->key = key;
+    theNode->keyID = theKeyId;
+    theNode->data = pred;
+
+
+    // If nothing is there
+    if ( table[hashIndex] == NULL ){
+	table[hashIndex] = theNode;
+	theNode->next = NULL;
+    }
+    else {
+	ChainNode * temp = table[hashIndex];
+	table[hashIndex] = theNode;
+	theNode->next = temp;
+    }
+    
 }
 
 #endif 
