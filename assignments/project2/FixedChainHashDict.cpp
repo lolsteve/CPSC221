@@ -117,6 +117,8 @@ void FixedChainHashDict::add(PuzzleState *key, PuzzleState *pred) {
 	theNode->next = temp;
     }
     
+    number++;
+
 }
 
 #endif 
