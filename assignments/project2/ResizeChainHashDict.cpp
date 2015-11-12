@@ -75,15 +75,45 @@ void ResizeChainHashDict::rehash() {
   std::cout << "*** REHASHING number=" << number << ", size changes from " << size;
   // End of "DO NOT CHANGE" Block
 
-
+  
   // TODO:  Your code goes here...
   // Be very careful with memory leakage here.
   // When you rehash, you'll either want to unlink each ChainNode
   // from the old table and re-link it into the new one, or
   // you'll want to create a new ChainNode in the new table, and make
   // sure you delete the old ChainNode.  But don't delete the PuzzleStates.
+  int old_size = size;
+  size_index++;
+  if ( primes[size_index] == -1 )
+      return;
+  else{
+      
+      size = primes[size_index];
+      ChainNode** newTable = new ChainNode*[size]();
+      ChainNode** tempTable = table;
+      table = newTable;
 
+      for ( int i = 0; i < old_size; i++ ){
 
+	  ChainNode * tempNode = tempTable[i];
+	  
+	  while ( tempNode != NULL ){
+	      
+	      add( tempNode->key , tempNode->data );
+	      ChainNode * deleteNode = tempNode;
+	      tempNode = tempNode->next;
+	      delete deleteNode;
+	  }
+
+	  tempTable[i] = NULL;
+	  
+      }
+      
+      
+      
+      delete [] tempTable;
+
+  }
   // 221 Students:  DO NOT CHANGE OR DELETE THE NEXT FEW LINES!!!
   // And leave this at the end of the rehash() function.
   // We will use this code when marking to be able to watch what
@@ -100,15 +130,63 @@ bool ResizeChainHashDict::find(PuzzleState *key, PuzzleState *&pred) {
 
   // TODO:  Your code goes here...
   // Don't forget to update the probes_stats!
+
+    string theKeyId = key->getUniqId();
+    int counter = 0;
+
+    int hashIndex = hash(theKeyId);
+    ChainNode *temp = table[hashIndex];
+
+    while ( temp != NULL ){
+	
+	// Ensuring we don't go out of bounds
+	if (counter < MAX_STATS ){
+	    probes_stats[counter]++;
+	}
+
+	counter++;
+	
+	// If key is found
+	if ( temp->keyID == theKeyId ){
+	    pred = temp->data;
+	    return true;
+	}
+
+	temp = temp->next;
+
+    }
+    
+    return false;
 }
 
 // You may assume that no duplicate PuzzleState is ever added.
 void ResizeChainHashDict::add(PuzzleState *key, PuzzleState *pred) {
-
+   
   // Rehash if adding one more element pushes load factor over 1/2
   if (2*(number+1) > size) rehash();  // DO NOT CHANGE THIS LINE
-
+  
   // TODO:  Your code goes here...
+    string theKeyId = key->getUniqId();
+    int hashIndex = hash(theKeyId);
+    
+    ChainNode * theNode = new ChainNode();
+    
+    theNode->key = key;
+    theNode->keyID = theKeyId;
+    theNode->data = pred;
+
+
+    // If nothing is there
+    if ( table[hashIndex] == NULL ){
+	table[hashIndex] = theNode;
+	theNode->next = NULL;
+    }
+    else {
+	ChainNode * temp = table[hashIndex];
+	table[hashIndex] = theNode;
+	theNode->next = temp;
+    }
+    number++;
 }
 
 #endif 
