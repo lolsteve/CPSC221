@@ -39,6 +39,8 @@ class HeapPriorityQueue : public BagOfPuzzleStates
     int first_child(int index);
     int num_children(int index);
     bool is_leaf(int index);
+    void swapDown(int index);
+    void swapUp(int index);
 
     // The array representation of the heap.
     vector<PuzzleState *> heap;
