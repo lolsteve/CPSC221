@@ -72,21 +72,25 @@ bool FixedChainHashDict::find(PuzzleState *key, PuzzleState *&pred) {
 
     while ( temp != NULL ){
 	
-	// Ensuring we don't go out of bounds
-	if (counter < MAX_STATS ){
-	    probes_stats[counter]++;
-	}
-
-	counter++;
-	
 	// If key is found
 	if ( temp->keyID == theKeyId ){
+            // Ensuring we don't go out of bounds
+	    if (counter < MAX_STATS ){
+	        probes_stats[counter]++;
+	    }
 	    pred = temp->data;
 	    return true;
 	}
 
+        counter++;
+
 	temp = temp->next;
 
+    }
+
+    // Ensuring we don't go out of bounds
+    if (counter < MAX_STATS ){
+        probes_stats[counter]++;
     }
     
     return false;
@@ -105,16 +109,15 @@ void FixedChainHashDict::add(PuzzleState *key, PuzzleState *pred) {
     theNode->keyID = theKeyId;
     theNode->data = pred;
 
-
     // If nothing is there
     if ( table[hashIndex] == NULL ){
-	table[hashIndex] = theNode;
 	theNode->next = NULL;
+	table[hashIndex] = theNode;
     }
     else {
 	ChainNode * temp = table[hashIndex];
-	table[hashIndex] = theNode;
 	theNode->next = temp;
+	table[hashIndex] = theNode;
     }
     
     number++;

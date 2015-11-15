@@ -136,26 +136,30 @@ bool ResizeChainHashDict::find(PuzzleState *key, PuzzleState *&pred) {
 
     int hashIndex = hash(theKeyId);
     ChainNode *temp = table[hashIndex];
-
+    
     while ( temp != NULL ){
-	
-	// Ensuring we don't go out of bounds
-	if (counter < MAX_STATS ){
-	    probes_stats[counter]++;
-	}
 
-	counter++;
-	
 	// If key is found
 	if ( temp->keyID == theKeyId ){
+            // Ensuring we don't go out of bounds
+	    if (counter < MAX_STATS ){
+	        probes_stats[counter]++;
+	    }
 	    pred = temp->data;
 	    return true;
 	}
+        
+        counter++;
 
 	temp = temp->next;
 
     }
     
+    // Ensuring we don't go out of bounds
+    if (counter < MAX_STATS ){
+        probes_stats[counter]++;
+    }
+
     return false;
 }
 
