@@ -1,16 +1,16 @@
-Student Name #1: TODO:
-Student ugrad login #1: TODO:
+Student Name #1: Steven Wallace [12228145]
+Student ugrad login #1: x9u9a
 
-Student Name #2: TODO:
-Student ugrad login #2: TODO:
+Student Name #2: Ahmed Elmaghraby [45461134]
+Student ugrad login #2: x2x9a
 
-Team name (for fun!): TODO:
+Team name (for fun!): Top Dawgs
 
 Acknowledgment that you understand and have followed the course's
 collaboration policy
 (http://www.ugrad.cs.ubc.ca/~cs221/current/syllabus.shtml#conduct):
 
-TODO: [[Put your names here again as a signature]]
+Steven Wallace and Ahmed Elmaghraby
 
 TODO: submit using: make handin-proj2
 
@@ -20,7 +20,12 @@ Approximate hours on project: TODO:
 
 ----------------------------------------------------------------------
 
-For teams, rough breakdown of work: TODO:
+For teams, rough breakdown of work:
+HeapPriorityQueue: Steven
+FixedChainHashDict: Ahmed
+ResizeChainHashDict: Ahmed
+probes_stats bug: Steven and Ahmed
+HANDIN.txt: Steven and Ahmed
 
 ----------------------------------------------------------------------
 
@@ -41,15 +46,34 @@ When you use StdQueue for activeStates?  (These will take several minutes.)
 Notice that these are MUCH faster than in Project 1, because I have
 improved LinkedListDict, but your code will make things run even faster!
 
+Stack:
+4m20s
+Queue:
+17m50s
+
 2.  Now, change the code to use FixedChainHashDict with size 1000.
 What are the runtimes, and how many steps long was the solution found,
 using StdStack and StdQueue?
 You can now see the trade-off of DFS vs. BFS.
 And you should see the huge gain of hashing.
 
+Stack:
+5.6s
+48431 steps
+Queue:
+25.4s
+31 steps
+
 3.  Repeat Q2 with ResizeChainHashDict.  (What are runtimes and steps, etc.?)
 What is the average number of
 collision chain nodes examined per call to find?
+
+Stack:
+1.5s
+48431 steps
+Queue:
+2.8s
+31 steps
 
 4.  Now, edit solve.cpp to go back to using LinkedListDict, but switch
 to HeapPriorityQueue.  Try running the program with the usleep and
@@ -58,11 +82,23 @@ no is fine, but it's fun to try to see what's happening.)  Then,
 comment out the usleep and cout statements and time this.  How long
 did it take?  You should really see the advantage of BestFS!
 
+TODO:
+0.053s
+
 5.  With your new data structures, the 3x3 slider puzzle has become
 too easy!  You can try the 4x4 slider puzzle if you'd like, but then
 switch to the 5x5 slider puzzle.  Make sure you are using HeapPriorityQueue.
 How long does this take if you use LinkedListDict?  FixedChainHashDict
 with size 1000?  ResizeChainHashDict?  Are you impressed?
+
+LinkedListDict:
+2m16s
+FixedChainHashDict:
+4s
+ResizeChainHashDict:
+2.8s
+
+Very impressed!
 
 ----------------------------------------------------------------------
 
