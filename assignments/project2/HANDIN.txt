@@ -16,7 +16,7 @@ TODO: submit using: make handin-proj2
 
 ----------------------------------------------------------------------
 
-Approximate hours on project: TODO:
+Approximate hours on project: 7 hours
 
 ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ HANDIN.txt: Steven and Ahmed
 
 ----------------------------------------------------------------------
 
-Acknowledgment of assistance: TODO:
+Acknowledgment of assistance: 
 
 ----------------------------------------------------------------------
 
@@ -82,7 +82,8 @@ no is fine, but it's fun to try to see what's happening.)  Then,
 comment out the usleep and cout statements and time this.  How long
 did it take?  You should really see the advantage of BestFS!
 
-TODO:
+No, however, after looking at the steps at the end, It seemed that when exploring states BestFS get the best closest state to the correct one. Thus, it is saving so much time by skipping states that are not really closer to the solution.
+ 
 0.053s
 
 5.  With your new data structures, the 3x3 slider puzzle has become
