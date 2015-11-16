@@ -145,7 +145,7 @@ ResizeChainHashDict:
 2.8s
 
 Steven: Very impressed!
-Ahmed: I love computer science :)
+Ahmed: I love computer science :)!
 
 ----------------------------------------------------------------------
 
