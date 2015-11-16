@@ -69,11 +69,56 @@ What is the average number of
 collision chain nodes examined per call to find?
 
 Stack:
-1.5s
+1.986s
 48431 steps
+
+0: 161763
+1: 31289
+2: 5378
+3: 655
+4: 62
+5: 6
+6: 0
+7: 0
+8: 0
+9: 0
+10: 0
+11: 0
+12: 0
+13: 0
+14: 0
+15: 0
+16: 0
+17: 0
+18: 0
+19: 0
+-----------
 Queue:
-2.8s
+4.473s
 31 steps
+
+Probe Statistics for find():
+0: 394944
+1: 75970
+2: 11411
+3: 1300
+4: 132
+5: 8
+6: 0
+7: 0
+8: 0
+9: 0
+10: 0
+11: 0
+12: 0
+13: 0
+14: 0
+15: 0
+16: 0
+17: 0
+18: 0
+19: 0
+
 
 4.  Now, edit solve.cpp to go back to using LinkedListDict, but switch
 to HeapPriorityQueue.  Try running the program with the usleep and
@@ -99,7 +144,8 @@ FixedChainHashDict:
 ResizeChainHashDict:
 2.8s
 
-Very impressed!
+Steven: Very impressed!
+Ahmed: I love computer science :)
 
 ----------------------------------------------------------------------
 
