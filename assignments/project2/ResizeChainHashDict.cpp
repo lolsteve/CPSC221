@@ -92,6 +92,7 @@ void ResizeChainHashDict::rehash() {
       ChainNode** newTable = new ChainNode*[size]();
       ChainNode** tempTable = table;
       table = newTable;
+	  number = 0;
 
       for ( int i = 0; i < old_size; i++ ){
 
@@ -108,7 +109,11 @@ void ResizeChainHashDict::rehash() {
 	  tempTable[i] = NULL;
 	  
       }
-      
+/*
+      for ( int k = 0 ; k < MAX_STATS ; k++ ){
+	  probes_stats[k] = 0;
+      }
+*/    
       
       
       delete [] tempTable;
