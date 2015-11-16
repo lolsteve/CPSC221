@@ -83,7 +83,6 @@ bool FixedChainHashDict::find(PuzzleState *key, PuzzleState *&pred) {
 	}
 
         counter++;
-
 	temp = temp->next;
 
     }
