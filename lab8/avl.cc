@@ -169,8 +169,26 @@ void doubleRotateRight( Node *& a ) {
   //
 void balance( Node *& x ) {
 
-// TODO : write this function
-  
+    // TODO : write this function
+    int balance_factor = x->left->height - x->right->height;
+    //if( balance_factor < 0 ) balance_factor = 0 - balance_factor;
+    if( balance_factor < -1 ) {
+        if( x->right->right->height > x->right->left->height ) {
+            rotateLeft(x);
+        }
+        else if( x->right->right->height < x->right->left->height ) {
+            doubleRotateLeft(x);
+        }
+    }
+    else if( balance_factor > 1 ) {
+        if( x->left->right->height > x->left->left->height ) {
+            doubleRotateRight(x);
+        }
+        else if( x->left->right->height < x->left->left->height ) {
+            rotateRight(x);
+        }
+    }
+    updateHeight(x);
 }
 
 // ********** DO NOT CHANGE BELOW HERE ****************
