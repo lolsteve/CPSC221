@@ -171,39 +171,50 @@ void balance( Node *& x ) {
 
   // TODO : write this function
   
-  if ( x->left == NULL && x->right == NULL ) return;
+  if( x->left == NULL && x->right == NULL ) return;
   int balance_factor;
-  if ( x->left == NULL){
+  int next_balance;
+  if( x->left == NULL ){
     balance_factor = -1 - x->right->height;
   }
-  else if ( x->right == NULL ){
+  else if( x->right == NULL ){
     balance_factor = x->left->height + 1;
   }
   else {
     balance_factor = x->left->height - x->right->height;
-  }  
+  }
+
   if( balance_factor < -1 ) {
-    Node * rightRight = x->right->right;
-    Node * rightLeft = x->right->left;
-   
-    if( rightRight != NULL && rightLeft != NULL &&  x->right->right->height > x->right->left->height ) {
+    if( x->right->left == NULL )
+        next_balance = -1 - x->right->right->height;
+    else if ( x->right->right == NULL )
+        next_balance = 1 + x->right->left->height;
+    else
+        next_balance = x->right->left->height - x->right->right->height;
+
+    if( next_balance < 0 ) {
       rotateLeft(x);
     }
-    else if( rightRight != NULL && rightLeft != NULL && x->right->right->height < x->right->left->height) {
+    else if( next_balance > 0 ) {
       doubleRotateLeft(x);
     }
   }
   else if( balance_factor > 1 ) {
-    Node * leftRight = x->left->right;
-    Node * leftLeft = x->left->left;
-    if( leftRight != NULL && leftLeft != NULL && x->left->right->height > x->left->left->height ) {
+    if( x->left->left == NULL )
+        next_balance = -1 - x->left->right->height;
+    else if ( x->left->right == NULL )
+        next_balance = 1 + x->left->left->height;
+    else
+        next_balance = x->left->left->height - x->left->right->height;
+
+    if( next_balance < 0 ) {
       doubleRotateRight(x);
     }
-    else if( leftRight != NULL && leftLeft != NULL && x->left->right->height < x->left->left->height ) {
+    else if( next_balance > 0 ) {
       rotateRight(x);
     }
   }
-  updateHeight(x);
+  //updateHeight(x);
 }
 
 // ********** DO NOT CHANGE BELOW HERE ****************
