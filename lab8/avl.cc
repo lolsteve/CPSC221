@@ -169,26 +169,41 @@ void doubleRotateRight( Node *& a ) {
   //
 void balance( Node *& x ) {
 
-    // TODO : write this function
-    int balance_factor = x->left->height - x->right->height;
-    //if( balance_factor < 0 ) balance_factor = 0 - balance_factor;
-    if( balance_factor < -1 ) {
-        if( x->right->right->height > x->right->left->height ) {
-            rotateLeft(x);
-        }
-        else if( x->right->right->height < x->right->left->height ) {
-            doubleRotateLeft(x);
-        }
+  // TODO : write this function
+  
+  if ( x->left == NULL && x->right == NULL ) return;
+  int balance_factor;
+  if ( x->left == NULL){
+    balance_factor = -1 - x->right->height;
+  }
+  else if ( x->right == NULL ){
+    balance_factor = x->left->height + 1;
+  }
+  else {
+    balance_factor = x->left->height - x->right->height;
+  }  
+  if( balance_factor < -1 ) {
+    Node * rightRight = x->right->right;
+    Node * rightLeft = x->right->left;
+   
+    if( rightRight != NULL && rightLeft != NULL &&  x->right->right->height > x->right->left->height ) {
+      rotateLeft(x);
     }
-    else if( balance_factor > 1 ) {
-        if( x->left->right->height > x->left->left->height ) {
-            doubleRotateRight(x);
-        }
-        else if( x->left->right->height < x->left->left->height ) {
-            rotateRight(x);
-        }
+    else if( rightRight != NULL && rightLeft != NULL && x->right->right->height < x->right->left->height) {
+      doubleRotateLeft(x);
     }
-    updateHeight(x);
+  }
+  else if( balance_factor > 1 ) {
+    Node * leftRight = x->left->right;
+    Node * leftLeft = x->left->left;
+    if( leftRight != NULL && leftLeft != NULL && x->left->right->height > x->left->left->height ) {
+      doubleRotateRight(x);
+    }
+    else if( leftRight != NULL && leftLeft != NULL && x->left->right->height < x->left->left->height ) {
+      rotateRight(x);
+    }
+  }
+  updateHeight(x);
 }
 
 // ********** DO NOT CHANGE BELOW HERE ****************
