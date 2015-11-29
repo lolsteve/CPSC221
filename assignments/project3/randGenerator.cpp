@@ -2,21 +2,35 @@
 #include <cstdlib> // for atoi
 #include <time.h>
 #include <stdlib.h>
+#include <fstream> // for file
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if (argc != 2) // remember, argv[0] is the program name
-    {
-        cerr << "Wrong number of arguments!" << endl;
-        return 1;
+    string line;
+    ifstream infile1("rand.txt");
+    ifstream infile2("rand2.txt");
+    ifstream infile3("rand3.txt");
+    if (infile1.is_open()) {
+        while (getline(infile1, line)) {
+            cout << "I " << line << endl;
+        }
+        infile1.close();
     }
-	srand(time(NULL));
+    if (infile2.is_open()) {
+        while (getline(infile2, line)) {
+            cout << "F " << line << endl;
+        }
+        infile2.close();
+    }
+    if (infile3.is_open()) {
+        while (getline(infile3, line)) {
+            cout << "R " << line << endl;
+        }
+        infile3.close();
+    }
 
-    int n = atoi(argv[1]);
-    for(int i = 1; i <= n; i++)
-        cout << "I " << rand() % n + 1 << endl;
 
     return 0;
 }
