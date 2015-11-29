@@ -1,18 +1,17 @@
 #include <iostream>
 #include <cstdlib> // for atoi
+#include <fstream> // for file
 using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if (argc != 2) // remember, argv[0] is the program name
-    {
-        cerr << "Wrong number of arguments!" << endl;
-        return 1;
+    ifstream infile("rand.txt");
+    string line;
+    if (infile.is_open()) {
+        while (getline(infile, line))
+            cout << "I " << line << endl;
+        infile.close();
     }
-
-    int n = atoi(argv[1]);
-    for(int i = 1; i <= n; i++)
-        cout << "I " << rand() % n + 1 << endl;
 
     return 0;
 }
