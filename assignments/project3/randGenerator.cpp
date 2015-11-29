@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cstdlib> // for atoi
+#include <time.h>
+#include <stdlib.h>
+
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -9,6 +12,7 @@ int main(int argc, char* argv[])
         cerr << "Wrong number of arguments!" << endl;
         return 1;
     }
+	srand(time(NULL));
 
     int n = atoi(argv[1]);
     for(int i = 1; i <= n; i++)
