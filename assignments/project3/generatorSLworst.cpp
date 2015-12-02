@@ -11,12 +11,10 @@ int main(int argc, char* argv[])
     }
 
     int n = atoi(argv[1]);
-    for (int i = 1; i <= n; i++)
-        cout << "I " << i << endl;
-
     for(int i = n; i >= 1; i--)
+        cout << "I " << i << endl;
+    for(int i = 1; i <= n; i++)
         cout << "F " << i << endl;
-
     for(int i = 1; i <= n; i++)
         cout << "R " << i << endl;
 
