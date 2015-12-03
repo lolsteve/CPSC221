@@ -8,6 +8,6 @@ Ugrad ID #2: x2x9a
 mtf,mys02
 hch,mys03
 bstT,mys04
-,mys05
+spt,mys05
 sl,mys06
 ,mys07

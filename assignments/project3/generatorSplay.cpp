@@ -14,10 +14,19 @@ int main(int argc, char* argv[])
     for (int i = 1; i <= n; i++)
         cout << "I " << i << endl;
 
-    for(int i = n; i >= 1; i--) {
+    for (int i = 1; i <= n; i++)
         cout << "F " << i << endl;
-        cout << "F " << i << endl;
+
+    for (int i = 1; i <= n; i++) {
+        if (i % 2) {
+            cout << "F 1" << endl;
+        } else {
+            cout << "F " << n << endl;
+        }
     }
+
+    for (int i = 1; i <= n; i++)
+        cout << "F 1" << endl;
 
     return 0;
 }
